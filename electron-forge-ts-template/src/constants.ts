@@ -1,0 +1,1 @@
+export const READ_FILE_CHANNEL = 'READ_FILE_CHANNEL';

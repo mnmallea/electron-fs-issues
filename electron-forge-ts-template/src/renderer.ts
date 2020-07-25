@@ -1,9 +1,10 @@
-import * as fs from 'fs';
+import { ipcRenderer } from 'electron';
+import { READ_FILE_CHANNEL } from './constants';
 
 const $placeholder = document.getElementById('placeholder') as HTMLElement;
 
 console.log('Reading file..');
-fs.promises.readFile('tini.csv')
+ipcRenderer.invoke(READ_FILE_CHANNEL, 'tini.csv')
     .then(content => {
         console.log('Done');
         const stringContent = content.toString();

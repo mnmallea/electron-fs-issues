@@ -11,7 +11,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     height: 600,
     width: 800,
-    webPreferences:{
+    webPreferences: {
       nodeIntegration: true
     }
   });
@@ -47,3 +47,12 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+import { ipcMain } from 'electron';
+import * as fs from 'fs';
+
+import { READ_FILE_CHANNEL } from './constants';
+
+const readFile = (fileName: string) => fs.promises.readFile(fileName)
+  .then(content => content.toString());
+
+ipcMain.handle(READ_FILE_CHANNEL, (event, fileName) => readFile(fileName));
